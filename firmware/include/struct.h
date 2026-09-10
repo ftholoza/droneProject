@@ -48,17 +48,17 @@ typedef struct s_button_state
     volatile bool pressed;
 } button_state_t;
 
-typedef struct s_led_state
-{
-    gpio_num_t pin;
-    bool led_state;
-} led_state_t;
+// typedef struct s_led_state
+// {
+//     gpio_num_t pin;
+//     bool led_state;
+// } led_state_t;
 
 typedef struct s_drone
 {
     mpu_state_t mpu;
     button_state_t button;
-    led_state_t led;
+    // led_state_t led;
 } drone_t;
 
 #endif

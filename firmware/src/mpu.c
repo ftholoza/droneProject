@@ -48,7 +48,7 @@ static esp_err_t configurer_i2c(void)
 }
 
 
-//ecrire dans un registre 
+//ecrire dans un registre
 static esp_err_t ecrire_registre(
     uint8_t registre,
     uint8_t valeur
@@ -272,7 +272,7 @@ esp_err_t mpu_lire_mesures(
      * Réglages par défaut :
      * accélération : -2 à +2 g, de -32768 à +32767 donc 16384 unités par g
      * gyroscope : de -250 degres/s à + 250 degrés/s, donc 131 unités par degré/s
-     * formule temperature fournie par la doc 
+     * formule temperature fournie par la doc
      */
     mesures->acceleration_x =
         acceleration_x_brute / 16384.0f;
@@ -328,8 +328,8 @@ void tache_mpu(void *arg)
             drone->mpu.calibration_requested = false;
 
             drone->mpu.calibration_valide = false;
-            drone->led.led_state = false;
-            gpio_set_level(drone->led.pin, 1);
+            // drone->led.led_state = false;
+            // gpio_set_level(drone->led.pin, 1);
 
             printf(
                 "Calibration : ne bougez pas le MPU6050\n"
@@ -391,12 +391,12 @@ void tache_mpu(void *arg)
             compteur_led++;
 
             if (compteur_led >= 500) {
-                drone->led.led_state = !drone->led.led_state;
+                // drone->led.led_state = !drone->led.led_state;
 
-                gpio_set_level(
-                    drone->led.pin,
-                    !drone->led.led_state
-                );
+                // gpio_set_level(
+                //     drone->led.pin,
+                //     !drone->led.led_state
+                // );
 
                 compteur_led = 0;
             }
@@ -438,12 +438,12 @@ void tache_mpu(void *arg)
         }
         else {
             drone->mpu.connection = false;
-            drone->led.led_state = false;
+            // drone->led.led_state = false;
 
             compteur_led = 0;
             compteur_affichage = 0;
 
-            gpio_set_level(drone->led.pin, 1);
+            // gpio_set_level(drone->led.pin, 1);
         }
     }
 }

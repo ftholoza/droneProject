@@ -18,7 +18,8 @@ void app_main(void)
 {
     static drone_t drone = {0};
 
-    led_configuration(&drone.led);
+    // led_configuration(&drone.led);
+	init_led(GPIO_LED_B);
 
     if (mpu_init(&drone.mpu) != ESP_OK)
     {
@@ -47,9 +48,19 @@ void app_main(void)
         &drone.mpu.task_handle
     );
 
-    timer_configuration(
-        interruption_mpu,
-        &drone,
-        1000
-    );
+	wifi_init_softap();
+	xTaskCreate(
+		udp_server_task,
+		"udp_server_task",
+		4096,
+		NULL,
+		6,
+		NULL
+	);
+
+	timer_configuration(
+		interruption_mpu,
+		&drone,
+		1000
+	);
 }
