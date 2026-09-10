@@ -7,6 +7,7 @@
 #include "freertos/FreeRTOS.h"
 #include "calibration.h"
 #include "struct.h"
+#include "led.h"
 
 
 static const char *TAG = "MPU6050";
@@ -328,9 +329,8 @@ void tache_mpu(void *arg)
             drone->mpu.calibration_requested = false;
 
             drone->mpu.calibration_valide = false;
-            // drone->led.led_state = false;
-            // gpio_set_level(drone->led.pin, 1);
-
+            if (get_led_state(GPIO_LED_B))
+                update_led(GPIO_LED_B, LED_OFF);
             printf(
                 "Calibration : ne bougez pas le MPU6050\n"
             );
@@ -391,13 +391,10 @@ void tache_mpu(void *arg)
             compteur_led++;
 
             if (compteur_led >= 500) {
-                // drone->led.led_state = !drone->led.led_state;
-
-                // gpio_set_level(
-                //     drone->led.pin,
-                //     !drone->led.led_state
-                // );
-
+                if (!get_led_state(GPIO_LED_B))
+                    update_led(GPIO_LED_B, LED_ON);
+                else
+                    update_led(GPIO_LED_B, LED_OFF);
                 compteur_led = 0;
             }
 
@@ -438,12 +435,10 @@ void tache_mpu(void *arg)
         }
         else {
             drone->mpu.connection = false;
-            // drone->led.led_state = false;
-
+            update_led(GPIO_LED_B, LED_OFF);
             compteur_led = 0;
             compteur_affichage = 0;
 
-            // gpio_set_level(drone->led.pin, 1);
         }
     }
 }
