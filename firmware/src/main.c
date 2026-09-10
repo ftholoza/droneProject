@@ -14,9 +14,20 @@
 #include "interruptions.h"
 #include "led.h"
 
+#include "nvs_flash.h"
+
 void app_main(void)
 {
     static drone_t drone = {0};
+
+	vTaskDelay(pdMS_TO_TICKS(1000));
+
+	esp_err_t err = nvs_flash_init();
+	if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+		ESP_ERROR_CHECK(nvs_flash_erase());
+		err = nvs_flash_init();
+	}
+	ESP_ERROR_CHECK(err);
 
     // led_configuration(&drone.led);
 	init_led(GPIO_LED_B);
