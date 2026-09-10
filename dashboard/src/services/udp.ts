@@ -5,6 +5,7 @@ const SOCKET_ID = 'drone-socket';
 
 enum Command {
 	LED = 0x01,
+	CALIBRATION = 0x02,
 }
 
 enum Method {
@@ -47,5 +48,9 @@ export class UdpService {
 	public getLedState = async (): Promise<boolean> => {
 		this.sendCommand([Command.LED, Method.GET]);
 		return false; // Placeholder, replace with actual implementation
+	}
+
+	public requestCalibration = async () => {
+		this.sendCommand([Command.CALIBRATION]);
 	}
 }

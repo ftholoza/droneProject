@@ -28,6 +28,18 @@ export default function App() {
 			LED : {ledState ? 'ALLUMÉE' : 'ÉTEINTE'}
 			</button>
 		</div>
+		<div style={styles.card}>
+			<p>Calibration</p>
+			<button
+				onClick={() => udpService.requestCalibration()}
+				style={{
+					...styles.button,
+					backgroundColor: '#2196f3'
+				}}
+			>
+				Demander la calibration
+			</button>
+		</div>
 		</div>
 	);
 }

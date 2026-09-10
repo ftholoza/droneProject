@@ -64,7 +64,7 @@ void app_main(void)
 		udp_server_task,
 		"udp_server_task",
 		4096,
-		NULL,
+		&drone,
 		6,
 		NULL
 	);

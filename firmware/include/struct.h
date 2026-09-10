@@ -1,5 +1,4 @@
-#ifndef STRUCT_H
-#define STRUCT_H
+#pragma once
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -44,21 +43,12 @@ typedef struct s_mpu_state
 
 typedef struct s_button_state
 {
-    gpio_num_t pin;
-    volatile bool pressed;
-} button_state_t;
-
-// typedef struct s_led_state
-// {
-//     gpio_num_t pin;
-//     bool led_state;
-// } led_state_t;
+	gpio_num_t pin;
+	volatile bool pressed;
+}	button_state_t;
 
 typedef struct s_drone
 {
-    mpu_state_t mpu;
-    button_state_t button;
-    // led_state_t led;
-} drone_t;
-
-#endif
+	mpu_state_t mpu;
+	button_state_t button;
+}	drone_t;

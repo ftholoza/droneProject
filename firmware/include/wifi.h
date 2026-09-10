@@ -11,9 +11,11 @@
 #include <lwip/sockets.h>
 
 #include <stdint.h>
+#include "struct.h"
 
 typedef enum __attribute__((packed)) {
 	MSG_TYPE_LED = 0x01,
+	MSG_TYPE_CALIBRATION = 0x02,
 }	msg_type_t;
 
 typedef enum __attribute__((packed)) {
@@ -38,4 +40,4 @@ typedef struct __attribute__((packed)) {
 }	led_resp_t;
 
 void	wifi_init_softap(void);
-void	udp_server_task(void *pvParameters);
+void	udp_server_task(void *param);
