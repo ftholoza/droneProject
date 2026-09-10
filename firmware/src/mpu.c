@@ -304,7 +304,7 @@ void tache_mpu(void *arg)
     drone_t *drone = (drone_t *)arg;
 
     uint32_t compteur_affichage = 0;
-    uint32_t compteur_led = 0;
+    // uint32_t compteur_led = 0;
 
     while (true) {
         /*
@@ -329,8 +329,8 @@ void tache_mpu(void *arg)
             drone->mpu.calibration_requested = false;
 
             drone->mpu.calibration_valide = false;
-            if (get_led_state(GPIO_LED_B))
-                update_led(GPIO_LED_B, LED_OFF);
+            // if (get_led_state(GPIO_LED_B))
+            //     update_led(GPIO_LED_B, LED_OFF);
             printf(
                 "Calibration : ne bougez pas le MPU6050\n"
             );
@@ -362,7 +362,7 @@ void tache_mpu(void *arg)
             );
 
             compteur_affichage = 0;
-            compteur_led = 0;
+            // compteur_led = 0;
 
             gpio_intr_enable(drone->button.pin);
         }
@@ -388,15 +388,15 @@ void tache_mpu(void *arg)
              * LED : changement toutes les
              * 500 lectures réussies.
              */
-            compteur_led++;
+            // compteur_led++;
 
-            if (compteur_led >= 500) {
-                if (!get_led_state(GPIO_LED_B))
-                    update_led(GPIO_LED_B, LED_ON);
-                else
-                    update_led(GPIO_LED_B, LED_OFF);
-                compteur_led = 0;
-            }
+            // if (compteur_led >= 500) {
+            //     if (!get_led_state(GPIO_LED_B))
+            //         update_led(GPIO_LED_B, LED_ON);
+            //     else
+            //         update_led(GPIO_LED_B, LED_OFF);
+            //     compteur_led = 0;
+            // }
 
             /*
              * Affichage toutes les 100 lectures.
@@ -435,8 +435,8 @@ void tache_mpu(void *arg)
         }
         else {
             drone->mpu.connection = false;
-            update_led(GPIO_LED_B, LED_OFF);
-            compteur_led = 0;
+            // update_led(GPIO_LED_B, LED_OFF);
+            // compteur_led = 0;
             compteur_affichage = 0;
 
         }
