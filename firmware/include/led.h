@@ -1,6 +1,5 @@
 #ifndef LED_H
 # define LED_H
-// #include <stdbool.h>
 
 #include "driver/gpio.h"
 #include "esp_log.h"

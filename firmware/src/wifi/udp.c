@@ -3,10 +3,12 @@
 
 #define UDP_PORT 8888
 
-void udp_server_task(void *pvParameters) {
+void udp_server_task(void *param) {
 	struct sockaddr_in server_addr, client_addr;
 	socklen_t addr_len = sizeof(client_addr);
 	char rx_buffer[1024];
+
+	drone_t *drone = (drone_t *)param;
 
 	// Create UDP socket
 	int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -67,6 +69,13 @@ void udp_server_task(void *pvParameters) {
 
 				break;
 			}
+
+			case MSG_TYPE_CALIBRATION: {
+				ESP_LOGI("UDP", "Received calibration command");
+				drone->mpu.calibration_requested = true;
+				break;
+			}
+
 			default:
 				ESP_LOGW("UDP", "Received unknown message type: 0x%02X", msg_type);
 				break;
